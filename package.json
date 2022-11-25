@@ -12,8 +12,13 @@
 		"@emotion/react": "^11.10.5",
 		"@mantine/core": "^5.8.2",
 		"@mantine/hooks": "^5.8.2",
+		"@tabler/icons": "^1.112.0",
+		"@tanstack/react-query": "^4.16.1",
 		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"react-dom": "^18.2.0",
+		"react-router-dom": "^6.4.3",
+		"zod": "^3.19.1",
+		"zod-validation-error": "^0.2.1"
 	},
 	"devDependencies": {
 		"@types/react": "^18.0.24",
@@ -33,6 +38,7 @@
 		"semi": true,
 		"singleQuote": true,
 		"useTabs": true,
-		"endOfLine": "crlf"
+		"endOfLine": "crlf",
+		"printWidth": 120
 	}
 }

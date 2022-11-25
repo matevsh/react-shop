@@ -21,5 +21,6 @@ module.exports = {
 		quotes: ['error', 'single'],
 		semi: ['error', 'always'],
 		'react/react-in-jsx-scope': 0,
+		'@typescript-eslint/no-empty-function': 0
 	},
 };
