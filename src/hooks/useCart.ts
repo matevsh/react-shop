@@ -32,5 +32,6 @@ export const useCart = () => {
 
 	return {
 		addItem,
+		products: cart.products,
 	};
 };
