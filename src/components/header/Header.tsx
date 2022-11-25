@@ -11,7 +11,6 @@ import {
 	ActionIcon,
 	Indicator,
 	Stack,
-	UnstyledButton,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconChevronDown, IconShoppingCart } from '@tabler/icons';
@@ -20,15 +19,14 @@ import { useCategories } from '../../queries/categoreies';
 import { Link, useNavigate } from 'react-router-dom';
 import HeaderLink from './HeaderLink';
 import HeaderMobile from './HeaderMobile';
-import { useContext } from 'react';
-import { CartCtx } from '../../providers/cart';
+import { useCart } from '../../hooks/useCart';
 
 const MainHeader = () => {
 	const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
 	const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
 	const { classes, theme } = useStyles();
 
-	const { products } = useContext(CartCtx);
+	const { products } = useCart();
 	const navigate = useNavigate();
 	const categories = useCategories();
 
@@ -39,7 +37,15 @@ const MainHeader = () => {
 			<Header height={60} px="md">
 				<Group position="apart" sx={{ height: '100%' }}>
 					<Link to={'/'} style={{ textDecoration: 'none' }}>
-						<UnstyledButton component={'p'}>react-shop</UnstyledButton>
+						<Text
+							variant="gradient"
+							fw={700}
+							color={'white'}
+							gradient={{ from: '#74C0FC', to: '#38D9A9', deg: 135 }}
+							component={'p'}
+						>
+							React shop
+						</Text>
 					</Link>
 
 					<Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
