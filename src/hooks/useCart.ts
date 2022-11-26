@@ -24,10 +24,10 @@ export const useCart = () => {
 	const addItem = (product: ProductT | undefined | null, quantity = 1) => {
 		if (!product) return;
 
-		const currentItem = currentItemIndex(products, product.id);
+		const currentIndex = currentItemIndex(products, product.id);
 
-		if (currentItem !== -1) {
-			return setQuantity(currentItem, products[currentItem].quantity + 1);
+		if (currentIndex !== -1) {
+			return setQuantity(products[currentIndex].product.id, products[currentIndex].quantity + quantity);
 		}
 
 		setCart([
