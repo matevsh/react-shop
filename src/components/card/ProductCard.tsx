@@ -5,6 +5,7 @@ import { useStyles } from './styles';
 import { useQuantity } from '../../hooks/useQuantity';
 import { useState } from 'react';
 import { useCart } from '../../hooks/useCart';
+import { useMediaQuery } from '@mantine/hooks';
 
 type Props = {
 	product: ProductT;
@@ -17,6 +18,8 @@ const ProductCard = ({ product: { title, category, description, rating, price, i
 	const [modalIsVisible, setModalIsVisible] = useState(false);
 	const navigate = useNavigate();
 	const { addItem } = useCart();
+
+	const largeScreen = useMediaQuery('(min-width: 900px)');
 
 	const addProductHandler = () => {
 		setModalIsVisible(true);
@@ -100,7 +103,7 @@ const ProductCard = ({ product: { title, category, description, rating, price, i
 						fullWidth
 						mt="sm"
 						radius="md"
-						size={'xs'}
+						size={largeScreen ? 'xs' : 'lg'}
 						sx={{ flex: '7' }}
 						onClick={addProductHandler}
 					>
@@ -109,9 +112,11 @@ const ProductCard = ({ product: { title, category, description, rating, price, i
 					<NumberInput
 						defaultValue={1}
 						value={quantity}
-						size={'xs'}
+						size={largeScreen ? 'xs' : 'lg'}
+						min={0}
+						max={99}
 						mt={12}
-						sx={{ flex: '2', minWidth: '50px' }}
+						sx={{ flex: '2', minWidth: largeScreen ? '50px' : '75px' }}
 						onChange={(x) => changeQuantity(x)}
 					/>
 				</Flex>
