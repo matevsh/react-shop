@@ -111,7 +111,7 @@ const ProductCard = ({ product: { title, category, description, rating, price, i
 						value={quantity}
 						size={'xs'}
 						mt={12}
-						sx={{ flex: '2' }}
+						sx={{ flex: '2', minWidth: '50px' }}
 						onChange={(x) => changeQuantity(x)}
 					/>
 				</Flex>
