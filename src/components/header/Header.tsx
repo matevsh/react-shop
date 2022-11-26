@@ -92,16 +92,18 @@ const MainHeader = () => {
 								fontWeight: 'bold',
 							}}
 						>
-							<ActionIcon
-								sx={{
-									background: 'none',
-									border: 'none',
-									cursor: 'pointer',
-								}}
-								size="xl"
-							>
-								<IconShoppingCart color={'white'} size={30} />
-							</ActionIcon>
+							<Link to={'/cart'}>
+								<ActionIcon
+									sx={{
+										background: 'none',
+										border: 'none',
+										cursor: 'pointer',
+									}}
+									size="xl"
+								>
+									<IconShoppingCart color={'white'} size={30} />
+								</ActionIcon>
+							</Link>
 						</Indicator>
 						<Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
 					</Flex>

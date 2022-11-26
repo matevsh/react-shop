@@ -1,37 +1,60 @@
 import { CartCtx } from '../providers/cart';
 import type { ProductT } from '../schemas/product';
+import type { CartProductT } from '../providers/cart';
 import { useContext } from 'react';
 
+const currentItemIndex = (products: CartProductT[], id: number) =>
+	products.findIndex(({ product }) => product.id === id);
+
+const updateQuantity = (cartProducts: CartProductT[], productId: number, newQuantity: number) => {
+	if (newQuantity <= 0) {
+		return cartProducts.filter((item) => item.product.id !== productId);
+	}
+
+	return cartProducts.map((item) => (item.product.id === productId ? { ...item, quantity: newQuantity } : item));
+};
+
 export const useCart = () => {
-	const cart = useContext(CartCtx);
+	const { setCart, products } = useContext(CartCtx);
+
+	const setQuantity = (productId: number, newQuantity: number) => {
+		setCart((items) => updateQuantity(items, productId, newQuantity));
+	};
 
 	const addItem = (product: ProductT | undefined | null, quantity = 1) => {
 		if (!product) return;
-		console.log(typeof cart.products, Array.isArray(cart.products));
-		console.log(cart.products);
 
-		const currentItem = cart.products.findIndex((item) => item.product.id === product.id);
+		const currentItem = currentItemIndex(products, product.id);
 
 		if (currentItem !== -1) {
-			const newCart = [...cart.products];
-			newCart[currentItem].quantity += quantity;
-
-			return cart.setCart(newCart);
+			return setQuantity(currentItem, products[currentItem].quantity + 1);
 		}
 
-		cart.setCart([
-			...cart.products,
+		setCart([
+			...products,
 			{
 				quantity,
 				product,
 			},
 		]);
+	};
 
-		console.log(cart.products);
+	const clearCart = () => setCart([]);
+
+	const deleteProduct = (productId: number) => {
+		setQuantity(productId, 0);
+	};
+
+	const totalPrice = () => {
+		return products.reduce((prev, curr) => prev + curr.quantity * curr.product.price, 0);
 	};
 
 	return {
 		addItem,
-		products: cart.products,
+		setQuantity,
+		products,
+		clearCart,
+		deleteProduct,
+		totalPrice,
 	};
 };

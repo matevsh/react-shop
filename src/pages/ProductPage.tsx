@@ -18,15 +18,25 @@ import {
 	SimpleGrid,
 	Center,
 } from '@mantine/core';
-import { useState } from 'react';
+import { useQuantity } from '../hooks/useQuantity';
+import { showNotification } from '@mantine/notifications';
 
 const ProductPage = () => {
 	const { id } = useParams();
 
-	const [quantity, setQuantity] = useState(1);
 	const { isLoading, data, isError, error } = useProduct(id);
+	const { quantity, changeQuantity } = useQuantity({});
 
 	const { addItem } = useCart();
+
+	const addToCartHandler = () => {
+		addItem(data, quantity);
+		showNotification({
+			title: 'Added item to your cart',
+			message: `Product ${data?.title} was added to your cart.`,
+			autoClose: 5000,
+		});
+	};
 
 	return (
 		<Error isError={isError} message={formatError(error)}>
@@ -65,11 +75,12 @@ const ProductPage = () => {
 								defaultValue={1}
 								min={1}
 								max={99}
-								onChange={(x) => typeof x === 'number' && setQuantity(x)}
+								value={quantity}
+								onChange={(x) => changeQuantity(x)}
 							/>
 						</Flex>
 
-						<Button variant="light" color="indigo" radius="md" onClick={() => addItem(data, quantity)}>
+						<Button variant="light" color="indigo" radius="md" onClick={addToCartHandler}>
 							Dodaj {quantity}
 						</Button>
 					</Stack>

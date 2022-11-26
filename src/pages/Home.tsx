@@ -1,7 +1,7 @@
 import ProductCard from '../components/card/ProductCard';
 import { SimpleGrid, Title } from '@mantine/core';
 import { useProducts } from '../queries/products';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 import { formatError } from '../utills/formatError';
@@ -26,11 +26,7 @@ const Home = () => {
 					]}
 				>
 					{data?.map((product) => {
-						return (
-							<Link to={`/product/${product.id}`} key={product.id} style={{ textDecoration: 'none' }}>
-								<ProductCard product={product} />
-							</Link>
-						);
+						return <ProductCard key={product.id} product={product} />;
 					})}
 				</SimpleGrid>
 			</Loading>

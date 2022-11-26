@@ -1,7 +1,8 @@
-import { Box, Button, Center, Collapse, Divider, Drawer, Group, ScrollArea, UnstyledButton } from '@mantine/core';
+import { Box, Center, Collapse, Divider, Drawer, ScrollArea, UnstyledButton } from '@mantine/core';
 import { IconChevronDown } from '@tabler/icons';
 import { useStyles } from './styles';
 import { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 type Props = {
 	drawerOpened: boolean;
@@ -27,9 +28,9 @@ const HeaderMobile = ({ drawerOpened, closeDrawer, toggleLinks, children, linksO
 			<ScrollArea sx={{ height: 'calc(100vh - 60px)' }} mx="-md">
 				<Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
-				<a href="#" className={classes.link}>
+				<Link to="/" className={classes.link} onClick={closeDrawer}>
 					Home
-				</a>
+				</Link>
 				<UnstyledButton className={classes.link} onClick={toggleLinks}>
 					<Center inline>
 						<Box component="span" mr={5}>
@@ -38,20 +39,11 @@ const HeaderMobile = ({ drawerOpened, closeDrawer, toggleLinks, children, linksO
 						<IconChevronDown size={16} color={theme.fn.primaryColor()} />
 					</Center>
 				</UnstyledButton>
-				<Collapse in={linksOpened}>{children}</Collapse>
-				<a href="#" className={classes.link}>
-					Learn
-				</a>
-				<a href="#" className={classes.link}>
-					Academy
-				</a>
+				<Collapse in={linksOpened} onClick={closeDrawer}>
+					{children}
+				</Collapse>
 
 				<Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
-
-				<Group position="center" grow pb="xl" px="md">
-					<Button variant="default">Log in</Button>
-					<Button>Sign up</Button>
-				</Group>
 			</ScrollArea>
 		</Drawer>
 	);
