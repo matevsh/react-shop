@@ -50,7 +50,15 @@ const ProductPage = () => {
 					]}
 				>
 					<Center bg={'white'}>
-						<Image src={data?.image} p={16} bg={'white'} m={16} radius={8} fit={'cover'} />
+						<Image
+							src={data?.image}
+							p={16}
+							bg={'white'}
+							m={16}
+							radius={8}
+							fit={'cover'}
+							alt={`${data?.title} image`}
+						/>
 					</Center>
 					<Stack pt={8} pb={32} px={16}>
 						<Title>{data?.title}</Title>

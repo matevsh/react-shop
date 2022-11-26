@@ -65,7 +65,7 @@ const ProductCard = ({ product: { title, category, description, rating, price, i
 							style={{
 								height: '160px',
 							}}
-							alt="product image"
+							alt={`${title} image`}
 						/>
 					</Link>
 				</Card.Section>
